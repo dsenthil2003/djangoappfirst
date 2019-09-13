@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function showRow()
+{
+alert(document.getElementById('myTable').rows[0].innerHTML);
+}
+
+function doSearch() {
+    var searchText = ' ';
+    var targetTable = document.getElementById('myTable');
+    var targetTableColCount;
+    var i;
+    var j;
+
+    for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+      if (rowIndex == 0) {
+           targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+      }
+
+      //Process data rows. (rowIndex >= 1)
+      for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+       if( document.getElementById('myTable').rows[rowIndex].cells[colIndex].innerHTML <= 0)
+           {
+             i = rowIndex;
+             j = colIndex;
+             return (i+" "+j);
+           }
+       }
+      }
+}
+
+function swapleft()
+{
+var rowncol = doSearch();
+var pos = new Array();
+pos = rowncol.split(" ");
+var i = parseInt(pos[0]);
+var j = parseInt(pos[1]);
+var jj = j+1;
+if (j<3)
+  {
+   var val1 = document.getElementById('myTable').rows[i].cells[j].innerHTML;
+   document.getElementById('myTable').rows[i].cells[j].innerHTML = document.getElementById('myTable').rows[i].cells[jj].innerHTML;
+   document.getElementById('myTable').rows[i].cells[jj].innerHTML = val1;
+  }
+}
+function swapright()
+{
+var rowncol = doSearch();
+var pos = new Array();
+pos = rowncol.split(" ");
+var i = parseInt(pos[0]);
+var j = parseInt(pos[1]);
+var jj = j-1;
+if (j>0)
+  {
+   var val1 = document.getElementById('myTable').rows[i].cells[j].innerHTML;
+   document.getElementById('myTable').rows[i].cells[j].innerHTML = document.getElementById('myTable').rows[i].cells[jj].innerHTML;
+   document.getElementById('myTable').rows[i].cells[jj].innerHTML = val1;
+  }
+}
+function swapup()
+{
+var rowncol = doSearch();
+var pos = new Array();
+pos = rowncol.split(" ");
+var i = parseInt(pos[0]);
+var j = parseInt(pos[1]);
+var ii = i+1;
+if (i<3)
+  {
+   var val1 = document.getElementById('myTable').rows[i].cells[j].innerHTML;
+   document.getElementById('myTable').rows[i].cells[j].innerHTML = document.getElementById('myTable').rows[ii].cells[j].innerHTML;
+   document.getElementById('myTable').rows[ii].cells[j].innerHTML = val1;
+  }
+}
+function swapdown()
+{
+var rowncol = doSearch();
+var pos = new Array();
+pos = rowncol.split(" ");
+var i = parseInt(pos[0]);
+var j = parseInt(pos[1]);
+var ii = i-1;
+if (i>0)
+  {
+   var val1 = document.getElementById('myTable').rows[i].cells[j].innerHTML;
+   document.getElementById('myTable').rows[i].cells[j].innerHTML = document.getElementById('myTable').rows[ii].cells[j].innerHTML;
+   document.getElementById('myTable').rows[ii].cells[j].innerHTML = val1;
+  }
+}
+function GetChar (event){
+            var keyCode = ('which' in event) ? event.which : event.keyCode;
+          //  alert ("The Unicode key code is: " + keyCode);
+            if (keyCode == 37) { swapleft() };
+            if (keyCode == 38) { swapup() };
+            if (keyCode == 39) { swapright() };
+            if (keyCode == 40) { swapdown() };
+        }
+</script>
+</head>
+<body>
+<table id="myTable" border="4" width="200" height="200" onkeydown="GetChar (event);">
+<tr align = "center">
+<td height="25" width="25">1</td>
+<td height="25" width="25"> </td>
+<td height="25" width="25">3</td>
+<td height="25" width="25">5</td>
+</tr>
+<tr align = "center">
+<td height="25" width="25">2</td>
+<td height="25" width="25">4</td>
+<td height="25" width="25">8</td>
+<td height="25" width="25">9</td>
+</tr>
+<tr align = "center">
+<td height="25" width="25">11</td>
+<td height="25" width="25">10</td>
+<td height="25" width="25">6</td>
+<td height="25" width="25">7</td>
+</tr>
+<tr align = "center">
+<td height="25" width="25">12</td>
+<td height="25" width="25">14</td>
+<td height="25" width="25">13</td>
+<td height="25" width="25">15</td>
+</tr>
+</table>
+</body>
+</html>

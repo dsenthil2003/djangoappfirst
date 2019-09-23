@@ -6,12 +6,16 @@ class Product(models.Model):
     price = models.FloatField()
     stock = models.IntegerField()
     image_url = models.CharField(max_length=2083)
+    def __str__(self):
+        return self.name
 
 
 class Offer(models.Model):
     code = models.CharField(max_length=255)
     description = models.CharField(max_length=2018)
     discount = models.FloatField()
+    def __str__(self):
+        return self.code
 
 
 class Addtocart(models.Model):
@@ -19,6 +23,9 @@ class Addtocart(models.Model):
     name = models.ForeignKey(Product,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     dateoforder = models.DateField(null=True)
+
+
+
 
 
 
